@@ -16,7 +16,8 @@
 //
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
-var cssFilesToInject = [
+var cssFilesToInject =
+  'bower_components/bootswatch/dist/css/bootstrap.css',
   'styles/**/*.css'
 ];
 
@@ -24,15 +25,14 @@ var cssFilesToInject = [
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
-
-  // Load sails.io before everything else
   'js/dependencies/sails.io.js',
-
-  // Dependencies like jQuery, or Angular are brought in here
+  '/bower_components/jquery/dist/jquery.js',
+  '/bower_components/angular/angular.js',
+  '/bower_components/angular-route/angular-route.js',
+  '/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+  '/bower_components/bootstrap/dist/js/boostrap.js',
   'js/dependencies/**/*.js',
 
-  // All of the rest of your client-side js files
-  // will be injected here in no particular order.
   'js/**/*.js'
 ];
 
@@ -51,37 +51,42 @@ var templateFilesToInject = [
 ];
 
 
-
-
-
-
-
-// Default path for public folder (see documentation for more information)
-var tmpPath = '.tmp/public/';
-
-// Prefix relative paths to source files so they point to the proper locations
-// (i.e. where the other Grunt tasks spit them out, or in some cases, where
-// they reside in the first place)
-module.exports.cssFilesToInject = cssFilesToInject.map(function(cssPath) {
-  // If we're ignoring the file, make sure the ! is at the beginning of the path
-  if (cssPath[0] === '!') {
-    return require('path').join('!.tmp/public/', cssPath.substr(1));
-  }
-  return require('path').join('.tmp/public/', cssPath);
+module.exports.cssFilesToInject = cssFilesToInject.map(function(path) {
+  return '.tmp/public/' + path;
 });
-module.exports.jsFilesToInject = jsFilesToInject.map(function(jsPath) {
-  // If we're ignoring the file, make sure the ! is at the beginning of the path
-  if (jsPath[0] === '!') {
-    return require('path').join('!.tmp/public/', jsPath.substr(1));
-  }
-  return require('path').join('.tmp/public/', jsPath);
+module.exports.jsFilesToInject = jsFilesToInject.map(function(path) {
+  return '.tmp/public/' + path;
 });
-module.exports.templateFilesToInject = templateFilesToInject.map(function(tplPath) {
-  // If we're ignoring the file, make sure the ! is at the beginning of the path
-  if (tplPath[0] === '!') {
-    return require('path').join('!assets/', tplPath.substr(1));
-  }
-  return require('path').join('assets/',tplPath);
+module.exports.templateFilesToInject = templateFilesToInject.map(function(path) {
+  return 'assets/' + path;
 });
 
 
+
+// // Default path for public folder (see documentation for more information)
+// var tmpPath = '.tmp/public/';
+//
+// // Prefix relative paths to source files so they point to the proper locations
+// // (i.e. where the other Grunt tasks spit them out, or in some cases, where
+// // they reside in the first place)
+// module.exports.cssFilesToInject = cssFilesToInject.map(function(cssPath) {
+//   // If we're ignoring the file, make sure the ! is at the beginning of the path
+//   if (cssPath[0] === '!') {
+//     return require('path').join('!.tmp/public/', cssPath.substr(1));
+//   }
+//   return require('path').join('.tmp/public/', cssPath);
+// });
+// module.exports.jsFilesToInject = jsFilesToInject.map(function(jsPath) {
+//   // If we're ignoring the file, make sure the ! is at the beginning of the path
+//   if (jsPath[0] === '!') {
+//     return require('path').join('!.tmp/public/', jsPath.substr(1));
+//   }
+//   return require('path').join('.tmp/public/', jsPath);
+// });
+// module.exports.templateFilesToInject = templateFilesToInject.map(function(tplPath) {
+//   // If we're ignoring the file, make sure the ! is at the beginning of the path
+//   if (tplPath[0] === '!') {
+//     return require('path').join('!assets/', tplPath.substr(1));
+//   }
+//   return require('path').join('assets/',tplPath);
+// });
